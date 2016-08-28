@@ -1,20 +1,52 @@
 #include<stdio.h>
 #include<stdlib.h>
 
-int main()
+
+struct node {
+	int data;
+	struct node *next;
+};
+struct node *head = NULL;
+
+
+void printlist()
 {
-	int n,i, pos;
-	struct node {
-		int data;
-		struct node *next;
-	};
+	struct node *current;
+	printf("The following is the created list: \n");
 
+	current = head;
+	while(current!=NULL)
+	{
+		printf("%d ", current->data);
+		current = current->next;
+	}
+	printf("\n");
+}
+
+
+void insertlist(int pos, int new_data)
+{
+	struct node *current, *new_node;
+	new_node = (struct node *)malloc(sizeof(struct node));
+	new_node->next = NULL;
+	new_node->data = new_data;
+	int i;
+	current = head;
+	for(i=0;i<pos-2;i++)
+	{
+		current = current->next;
+	}
+
+	new_node->next = current->next;
+	current->next = new_node;
+
+}
+
+
+void createlist(int n)
+{
 	struct node *new_node, *current;
-	struct node *head = NULL;
-
-	printf("Enter the number of students: ");
-	scanf("%d", &n);
-
+	int i;
 	for(i=0;i<n;i++)
 	{
 		new_node = (struct node *)malloc(sizeof(struct node));
@@ -31,38 +63,33 @@ int main()
 			current = new_node;
 		}
 	}
+}
 
-	printf("The following is the created list: \n");
+int main()
+{
+	int n,i, pos, new_data;
 
-	current = head;
-	while(current!=NULL)
-	{
-		printf("%d ", current->data);
-		current = current->next;
-	}
-	printf("\n");
+	struct node *new_node, *current;
+	
+	printf("Enter the number of students: ");
+	scanf("%d", &n);
 
+	createlist(n);
 
-
-	new_node = (struct node *)malloc(sizeof(struct node));
+	printlist();
 
 
 	printf("Where do you want to insert the new data?: ");
 	scanf("%d", &pos);
 	printf("\nEnter the new data: ");
-	scanf("%d", &new_node->data);
+	scanf("%d", &new_data);
+	
 
+	//printf("\n\n\nAbhi tum yaha pe ho: ");
 
-
-	printf("\n\n\nAbhi tum yaha pe ho: ");
-	current = head;
-	for(i=0;i<pos;i++)
-	{
-		printf("%d ", current->data);
-		current = current->next;
-	}
-
-
+	insertlist(pos, new_data);
+	
+	printlist();
 
 	return 0;
 }
