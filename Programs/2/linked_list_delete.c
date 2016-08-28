@@ -53,7 +53,7 @@ void deletelist(int del_roll)
 	while(current!=NULL)
 	{
 		//printf("%d ", current->data);
-		if(current->data == del_roll){x
+		if(current->data == del_roll){
 			printf("Value found at %d\n", i);
 			break;
 		}
